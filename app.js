@@ -7,6 +7,7 @@ const app = express();
 // 导入路由模块
 const userRouter = require('./router/user')
 const userinfoRouter = require('./router/userinfo')
+const artCateRouter = require('./router/artcate')
 
 // 导入cors中间件
 const cors = require('cors')
@@ -47,6 +48,7 @@ app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] 
 // 注册路由模块
 app.use('/api', userRouter)
 app.use('/my', userinfoRouter)
+app.use('/my/article', artCateRouter)
 
 
 // 错误中间件
