@@ -39,8 +39,8 @@ exports.updateArticleCates = (req, res) => {
             if (err)
                 return res.cc(err)
             if (results.affectedRows !== 1)
-                return res.cc('新增文章分类失败')
-            res.cc('新建文章分类成功', 0)
+                return res.cc('新增文章分类失败!')
+            res.cc('新建文章分类成功!', 0)
         })
 
     })
@@ -53,7 +53,23 @@ exports.deleteCateById = (req, res) => {
         if (err)
             return res.cc(err)
         if (results.affectedRows !== 1)
-            return res.cc('删除文章分类失败')
-        res.cc('删除文章分类成功', 0)
+            return res.cc('删除文章分类失败!')
+        res.cc('删除文章分类成功!', 0)
+    })
+}
+
+// 根据id获取文章分类数据
+exports.getCateById = (req, res) => {
+    const sql = 'select * from ev_article_cate where id=?'
+    db.query(sql, req.params.id, (err, results) => {
+        if (err)
+            return res.cc(err)
+        if (results.length !== 1)
+            return res.cc('获取文章分类数据失败!')
+        res.send({
+            status: 0,
+            message: '获取文章分类数据成功！',
+            data: results[0],
+        })
     })
 }
