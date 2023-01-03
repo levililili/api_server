@@ -21,3 +21,13 @@ exports.add_cate_schema = {
         alias,
     }
 }
+
+// 定义 分类id 的校验规则
+const id = joi.number().min(1).integer().required()
+
+// 定义验证规则对象---删除分类
+exports.delete_cate_schema = {
+    params: {
+        id,
+    }
+}
