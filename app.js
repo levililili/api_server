@@ -8,6 +8,7 @@ const app = express();
 const userRouter = require('./router/user')
 const userinfoRouter = require('./router/userinfo')
 const artCateRouter = require('./router/artcate')
+const articleRouter = require('./router/article')
 
 // 导入cors中间件
 const cors = require('cors')
@@ -20,6 +21,9 @@ const config = require('./config')
 
 // 导入解析token的中间件
 const expressJWT = require('express-jwt')
+
+// 托管静态资源文件
+app.use('/uploads', express.static('./uploads'))
 
 // 全局注册cors中间件
 app.use(cors())
@@ -49,6 +53,7 @@ app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] 
 app.use('/api', userRouter)
 app.use('/my', userinfoRouter)
 app.use('/my/article', artCateRouter)
+app.use('/my/article', articleRouter)
 
 
 // 错误中间件
